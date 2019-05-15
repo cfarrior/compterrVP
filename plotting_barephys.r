@@ -1,10 +1,9 @@
 rm(list=ls())
-setwd("c:/usr/comp_terr/comp-terr-VP2/")
-
-source("compterrbarephys_working.r")
+setwd("c:/usr/comp_terr/compterrVP/")
+source("compterr_barephys.r")
 
 #setting up file locations
-mainfile = "c:/usr/comp_terr/comp-terr-VP2/"
+mainfile = "c:/usr/comp_terr/compterrVP/"
 
 outfolder = paste(mainfile,"RoutputBare/",sep="")
 dir.create(outfolder)
