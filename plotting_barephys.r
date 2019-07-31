@@ -71,26 +71,29 @@ mort = 1
 	if(!savefig) X11(width=xplots*2.5,height=yplots*2.5)
 	par(mfrow=c(yplots,xplots),cex.lab=cxlab)
 	
-	plot(datac0$n,datac0$r,ylab="",xlab="",ylim=c(0,1.5),pch=19,col="gray",cex=pcx)
+	plot(datac0$n,datac0$r,ylab="",xlab="",ylim=c(0,1.2),pch=19,col="gray",cex=pcx)
 	lines(seq(2,10),seq(2,10)*0 + (R/cr-delta/uS),col="gray")
 	mtext("A",adj=0,line=2)
 	mtext(r.lab,side=2,line=2.5,cex=.8)
 	mtext(n.lab,side=1,line=2.5,cex=.8)
 	points(datac1$n,datac1$r,pch=19,col="black")
-
-	plot(datac0$n,datac0$x,ylab="",xlab="",ylim=c(0,1),pch=19,col="gray",cex=pcx)
+	legend(4,.6,c("cx=0","cx=1.5","mean-field"),pch=c(19,19,NA),col=c("gray","black","gray"),lty=c(NA,NA,1),bty="n",cex=.75)
+	
+	plot(datac0$n,datac0$x,ylab="",xlab="",ylim=c(0,1.5),pch=19,col="gray",cex=pcx,yaxt="n")
+	axis(2,at = c(0,.5,1))
 	lines(seq(2,10,by=0.01),1-1/seq(2,10,by=0.01),col="gray")
 	mtext("B",adj=0,line=2)
 	mtext(x.lab,side=2,line=2.5,cex=.8)
 	mtext(n.lab,side=1,line=2.5,cex=.8)
 	points(datac1$n,datac1$x,pch=19,col="black")
+	legend(1,1.65,c("cx=0","cx=1.5","mean-field"),pch=c(19,19,NA),col=c("gray","black","gray"),lty=c(NA,NA,1),bty="n",cex=.75)
 	
 	plot(datac0$n,datac0$fESS,ylab="",xlab="",pch=19,col="gray",cex=pcx,ylim=c(0,max(datac0$fESS)+.5))
 	lines(seq(2,10),seq(2,10)*0,col="gray")	
 	mtext("C",adj=0,line=2)
 	mtext(fec.lab,side=2,line=2.5,cex=.8)
 	mtext(n.lab,side=1,line=2.5,cex=.8)
-	points(datac1$n,datac1$fESS,pch=19,col="black")
+	points(datac1$n,datac1$fESS,pch=19,col="black")	
 	legend(4,2.2,c("cx=0","cx=1.5","mean-field"),pch=c(19,19,NA),col=c("gray","black","gray"),lty=c(NA,NA,1),bty="n",cex=.75)
 	
 	plot(datac0$n,(datac0$foptim-datac0$fESS)/datac0$foptim,ylim=c(0,1.05),ylab="",xlab="",pch=19,col="gray",cex=pcx)
@@ -99,7 +102,8 @@ mort = 1
 	mtext("degree of overproliferation",side=2,line=2.5,cex=.8)
 	mtext(n.lab,side=1,line=2.5,cex=.8)
 	points(datac1$n,datac1$pcompo,pch=19,col="black")
-	text(5,0.2,expression(paste("(",italic(f),scriptstyle(max),"-",italic(f),scriptstyle(ESS),")"/italic(f),scriptstyle(max),sep="")))
+	text(5,0.58,expression(paste("(",italic(f),scriptstyle(max),"-",italic(f),scriptstyle(ESS),")"/italic(f),scriptstyle(max),sep="")),cex=.75)
+	legend(2.5,.55,c("cx=0","cx=1.5","mean-field"),pch=c(19,19,NA),col=c("gray","black","gray"),lty=c(NA,NA,1),bty="n",cex=.75)
 	
 	if(savefig) dev.off()		
 }# end Figure 2
@@ -160,7 +164,7 @@ mort = 1
 	
 	aa$inv = round(aa$inv,4)
 
-	plot(aa$nrings,aa$nrings.i,type="n",xlab="Resident's #rings reached",ylab="Mutant's #rings reached",ylim=c(-.2,2.2),xlim=c(-.2,2.2),xaxt="n",yaxt="n")
+	plot(aa$nrings,aa$nrings.i,type="n",xlab="Residents' #rings reached",ylab="Mutant's #rings reached",ylim=c(-.2,2.2),xlim=c(-.2,2.2),xaxt="n",yaxt="n")
 	axis(1,c(0,1,2),c("0","1","2"))
 	axis(2,c(0,1,2),c("0","1","2"))
 	winners = aa[aa$inv>0,]
