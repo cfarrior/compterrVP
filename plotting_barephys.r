@@ -67,7 +67,10 @@ mort = 1
 
 	xplots = 2; yplots = 2; 
 	if(savefig) pdf(paste(figfolder,"nvar",".pdf",sep=""),width=xplots*2.5,height=yplots*2.5)
-	if(!savefig) X11(width=xplots*2.5,height=yplots*2.5)
+	if(!savefig){
+		if(os=="mac") quartz(width=xplots*2.5,height=yplots*2.5)
+		if(os!="mac") X11(width=xplots*2.5,height=yplots*2.5)
+	}
 	par(mfrow=c(yplots,xplots),cex.lab=cxlab)
 	
 	plot(datac0$n,datac0$r,ylab="",xlab="",ylim=c(0,1.5),pch=19,col="gray",cex=pcx)
@@ -118,7 +121,10 @@ mort = 1
 
 	xplots=2; yplots=2; 
 	if(savefig) pdf(paste(figfolder,filestem,".pdf",sep=""),width=xplots*2.5,height=yplots*2.5)
-	if(!savefig) X11(width=xplots*2.5,height=yplots*2.5)
+	if(!savefig){
+		if(os!="mac") quartz(width=xplots*2.5,height=yplots*2.5)
+		if(os=="mac") X11(width=xplots*2.5,height=yplots*2.5)
+	}
 	par(mfrow=c(yplots,xplots),cex.lab=cxlab)
 	for(column in c(2,1,3,13)){ #(2) x, (1) r, (3) fESS, (13) fraction of reproduction lost due to belowground competition
 		if(column==2){ y.lab=  x.lab; letter = "A";ylim=c(0,.8)}
@@ -154,7 +160,10 @@ mort = 1
 
 	xplots=1; yplots=1
 	if(savefig) pdf(paste(figfolder,"hexdistinv",".pdf",sep=""),width=xplots*3.5,height=yplots*3.5)
-	if(!savefig) X11(width=xplots*3.5,height=yplots*3.5)
+	if(!savefig){
+		if(os=="mac") quartz(width=xplots*3.5,height=yplots*3.5)
+		if(os!="mac") X11(width=xplots*3.5,height=yplots*3.5)
+	}
 	par(mfrow=c(yplots,xplots),cex.lab=cxlab)
 	
 	aa$inv = round(aa$inv,4)
@@ -246,7 +255,10 @@ mort = 1
 			delvar = delvar[delvar$nd<1,]; delvar = delvar[order(delvar$delta),]
 			
 			xplots = 3; yplots = 1
-			if(!savefig) X11(width=xplots*2.5,height=yplots*2.5)
+			if(!savefig){
+				if(os=="mac") quartz(width=xplots*2.5,height=yplots*2.5)
+				if(os!="mac") X11(width=xplots*2.5,height=yplots*2.5)
+			} 
 			if(savefig) pdf(paste(figfolder,comp,"_cxnot",cxnotD*1000,"_delta",deltaD*1000,".pdf",sep=""),width=xplots*2.5,height=yplots*2.5)
 			par(mfrow=c(yplots,xplots),cex.lab=1.1,oma=c(0,0,0,2),mar=c(4,4,4,2)+0.1)
 			
@@ -297,7 +309,10 @@ mort = 1
 	delvar = delvar[delvar$nd<1,]; delvar = delvar[order(delvar$delta),]
 		
 	xplots = 3; yplots = 1
-	if(!savefig) X11(width=xplots*2.5,height=yplots*2.5)
+	if(!savefig){
+		if(os=="mac") quartz(width=xplots*2.5,height=yplots*2.5)
+		if(os!="mac") X11(width=xplots*2.5,height=yplots*2.5)
+	} 
 	if(savefig) pdf(paste(figfolder,"rcompoptim",cxnotD*10,deltaD*1000,".pdf",sep=""),width=xplots*2.5,height=yplots*2.5)
 	par(mfrow=c(yplots,xplots),cex.lab=1.1,oma=c(0,0,0,2),mar=c(4,4,4,2)+0.1)
 	

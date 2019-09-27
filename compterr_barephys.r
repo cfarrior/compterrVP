@@ -1,4 +1,4 @@
-#C. Farrior - last updated May 13, 2019 
+#C. Farrior - last updated Sept 26, 2019 
 #cfarrior@gmail.com
 
 #This file holds the meat of the biology in the model.
@@ -71,6 +71,20 @@ for(var1 in var1Vgo){
 		rxcomp_Mtemp  = rbind(rxcomp_Mtemp ,c(var1,var2,var1tick,var2tick))
 	}
 }
+
+#needed for plotting. Let me know if there is a better way! 
+get_os <- function() {
+  if (.Platform$OS.type == "windows") { 
+    "win"
+  } else if (Sys.info()["sysname"] == "Darwin") {
+    "mac" 
+  } else if (.Platform$OS.type == "unix") { 
+    "unix"
+  } else {
+    stop("Unknown OS")
+  }
+}
+os = get_os()
 
 ##############################
 getParamsV = function(){
@@ -149,8 +163,9 @@ getESS_main = function(comp,n=NaN,R=1,delta=0,cx=NaN,nd=1,cpos=NaN,init=NaN,file
 			for(ndgo in ndV){
 				fminusm = zeroPopDyn(ndgo,paramsV) #within zeroPopDyn the n is updated with ndgo
 				bb = rbind(bb,c(ndgo,fminusm))
-			}			
-			X11()
+			}
+			if(os!="mac") X11()
+			if(os=="mac") quartz()
 			plot(bb[,1],bb[,2],main="",xlab="nd",ylab="f-m")
 			lines(bb[,1],bb[,2])
 			abline(0,0)
@@ -256,7 +271,12 @@ ESSCSSverificationplots = function(data,comp="hex",var,fileadd=""){
 		if(comp=="ncomp") print(paramsV$n)
 
 
-		if(!savefig) X11(width=8,height=3)
+		if(!savefig) 
+		if(!savefig){
+			if(os!="mac") X11(width=8,height=3)
+			if(os=="mac") quartz(width=8,height=3)
+		}
+			
 		if(savefig) pdf(paste(figfolder,"ESSvar",var,fileadd,i,".pdf",sep=""),width=8,height=3)
 		par(mfrow=c(1,3))
 

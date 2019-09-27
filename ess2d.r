@@ -13,6 +13,19 @@ project = NaN
 #paramsV includes all of the parameters that you may need to execute get_inv(). this vector is passed throughout the functions in here and only openned back in your get_inv code.
 #get_inv should return a positive value if the invader succeeds, 0 if it is neutral and negative if it does not succeed (usually: f.i - f.r)
 
+get_os <- function() {
+  if (.Platform$OS.type == "windows") { 
+    "win"
+  } else if (Sys.info()["sysname"] == "Darwin") {
+    "mac" 
+  } else if (.Platform$OS.type == "unix") { 
+    "unix"
+  } else {
+    stop("Unknown OS")
+  }
+}
+os = get_os()
+
 ##############################
 getESS_2D = function(var1init,var2init,var1V,var2V,initreps=7,paramsV){
 #var1init = initial guess for var1
@@ -360,7 +373,7 @@ ESSCSSverificationplots_generic = function(essV,var1V,var2V,paramsV){
 #function that shows 2D PIPs and vector fields for to allow you to visually verify a solution is both an ESS and a CSS
 ##############################
 		
-		X11(width=8,height=3)		
+		if(os=="mac") quartz(width=8,height=3); if(os!="mac") X11(width=8,height=3)		
 		par(mfrow=c(1,2))
 
 		#plots to show ESS (left panels)
