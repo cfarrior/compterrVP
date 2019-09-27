@@ -1,6 +1,7 @@
 # compterrVP
 
-Code to accompany "Theory predicts plants grow roots to compete with only their closest neighbors"
+Code to accompany: Farrior, C.E. Theory predicts plants grow roots to compete with only
+their closest neighbours. Proceedings of the Royal Society of London, B. doi:10.1098/rspb.2019.1129
 
 plotting_barephys.r runs the code;
 compterr_barephys.r holds the main model and runs analyses;
